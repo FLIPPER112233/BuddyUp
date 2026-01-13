@@ -36,10 +36,10 @@
   </a>
 
   <div class="nav-links" id="navLinks">
-    <button class="nav-btn active" onclick="showSection('home'); toggleMenu()">Home</button>
-    <button class="nav-btn" onclick="showSection('about'); toggleMenu()">About</button>
-    <button class="nav-btn" onclick="showSection('quiz'); toggleMenu()">MBTI Test</button>
-    <button class="nav-btn" onclick="showSection('teacher'); toggleMenu()">Teacher Area</button>
+    <button class="nav-btn active" onclick="showSection('home')">Home</button>
+    <button class="nav-btn" onclick="showSection('about')">About</button>
+    <button class="nav-btn" onclick="showSection('quiz')">MBTI Test</button>
+    <button class="nav-btn" onclick="showSection('teacher')">Teacher Area</button>
     <button class="nav-btn" onclick="showIceBreaker()">Ice Breaker</button>
   </div>
 </nav>
@@ -54,15 +54,15 @@
       </p>
 
       <div class="info-cards">
-        <div class="info-card">
+        <div class="info-card" onclick="showSection('quiz')">
           <h3>Take the Test</h3>
           <p>Complete the MBTI assessment to discover your personality type</p>
         </div>
-        <div class="info-card">
+        <div class="info-card" onclick="showSection('about')">
           <h3>Learn About MBTI</h3>
           <p>Understand the 16 personality types and their characteristics</p>
         </div>
-        <div class="info-card">
+        <div class="info-card" onclick="showSection('teacher')">
           <h3>Build Teams</h3>
           <p>Teachers can create balanced seating arrangements</p>
         </div>
