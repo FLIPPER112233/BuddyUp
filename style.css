@@ -13,7 +13,21 @@ body{
   100%{background-position:0% 50%;}
 }
 
+.home-button {
+  position: fixed;
+  top: 10px;
+  left: 30px;
+  background: transparent url('assets/home-icon.png') no-repeat center center;
+  /*color: white; */
+  border: none;
+  padding: 25px 90px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1100; /* Ensure it stays above other elements */
+  /* transition: background 0.3s ease; */
 
+
+}
 
 .navbar {
   position: fixed; /* We'll make it sticky too (see #2) */
@@ -51,8 +65,7 @@ body{
 
 /* Logo image */
 .logo img {
-  height: 100px; /* Stays inside the navbar height */
-  max-height: 80px; /* Keeps it from getting too big */
+  height: 50px; /* Adjusted to fit navbar height */
   width: auto; /* Maintain aspect ratio */
   object-fit: contain;
 }
@@ -114,6 +127,7 @@ body{
 }
 
 .nav-btn:hover {
+  transition: background 150ms ease;
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -233,6 +247,7 @@ textarea{resize:vertical;min-height:150px;}
   text-align: center;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 /* Different background for each card */
@@ -372,3 +387,4 @@ color:white;padding:5px 12px;border-radius:20px;font-weight:600;font-size:0.9rem
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
+  
