@@ -281,9 +281,15 @@ function generateSeating() {
       if (group[j]) {
         seat.classList.add("filled");
         seat.innerHTML = `<strong>${group[j].name}</strong><br><small>${group[j].mbti}</small>`;
+        seat.draggable = true;
+        seat.addEventListener('dragstart', handleDragStart);
+        seat.addEventListener('dragover', handleDragOver);
+        seat.addEventListener('drop', handleDrop);
       } else {
         seat.classList.add("empty");
         seat.textContent = "Empty Seat";
+        seat.addEventListener('dragover', handleDragOver);
+        seat.addEventListener('drop', handleDrop);
       }
 
       seatGrid.appendChild(seat);
@@ -296,6 +302,56 @@ function generateSeating() {
   document.getElementById("exportSection").classList.remove("hidden");
 }
 
+// Drag and Drop Handlers for Seating
+function handleDragStart(e) {
+  e.dataTransfer.setData('text/html', e.target.innerHTML);
+  e.dataTransfer.setData('text/classes', e.target.className);
+  e.target.style.opacity = '0.5';
+}
+
+function handleDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  const draggedHTML = e.dataTransfer.getData('text/html');
+  const draggedClasses = e.dataTransfer.getData('text/classes');
+  const draggedElement = document.querySelector('.seat[style*="opacity: 0.5"]');
+
+  if (draggedElement) {
+    draggedElement.style.opacity = '1';
+  }
+
+  // Swap content and classes
+  const tempHTML = e.target.innerHTML;
+  const tempClasses = e.target.className;
+
+  e.target.innerHTML = draggedHTML;
+  e.target.className = draggedClasses;
+
+  draggedElement.innerHTML = tempHTML;
+  draggedElement.className = tempClasses;
+
+  // Update draggable attributes
+  updateSeatDraggableAttributes(e.target);
+  updateSeatDraggableAttributes(draggedElement);
+}
+
+function updateSeatDraggableAttributes(seat) {
+  if (seat.classList.contains('filled')) {
+    seat.draggable = true;
+    seat.addEventListener('dragstart', handleDragStart);
+    seat.addEventListener('dragover', handleDragOver);
+    seat.addEventListener('drop', handleDrop);
+  } else {
+    seat.draggable = false;
+    seat.removeEventListener('dragstart', handleDragStart);
+    seat.addEventListener('dragover', handleDragOver);
+    seat.addEventListener('drop', handleDrop);
+  }
+}
 
 // Export seating chart to CSV
 function exportToCSV() {
